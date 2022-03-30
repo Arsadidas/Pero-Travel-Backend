@@ -3,15 +3,16 @@ const mongoose = require("mongoose");
 const reviewSchema = mongoose.Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "User"
+    ref: "User",
   },
   tour: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Tour"
+    ref: "Tour",
   },
-  userName: String,
+  firstName: String,
+  lastName: String,
   userAge: Number,
-  text: String
+  text: String,
 });
 
 const Review = mongoose.model("Review", reviewSchema);
