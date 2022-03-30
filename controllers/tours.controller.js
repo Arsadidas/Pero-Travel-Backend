@@ -29,9 +29,19 @@ module.exports.toursController = {
 
   changeTour: async (req, res) => {
     try {
-      
+      const { typeTour, place, title, desc, priceForChild, duration } =
+        req.body;
+      const tour = await Tour.findByIdAndUpdate(req.params.toursId, {
+        typeTour,
+        place,
+        title,
+        desc,
+        priceForChild,
+        duration,
+      });
+      res.json(tour);
     } catch (e) {
-      res.status(401).json({ error: "Ошибка " + e.toString() });
+      res.status(401).json("Ошибка " + e.toString());
     }
-  }
+  },
 };
