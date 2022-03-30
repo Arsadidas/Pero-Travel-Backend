@@ -9,10 +9,7 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-app.use(require('./routes/users.route'))
-app.use(require('./routes/optinals.route'))
-app.use(require('./routes/tours.route'))
-app.use(require('./routes/reviews.route'))
+app.use(require('./routes'))
 
 const connect = async () => {
     try {
