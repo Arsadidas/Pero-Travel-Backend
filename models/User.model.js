@@ -7,8 +7,7 @@ const userSchema = mongoose.Schema({
     type: String,
     default: "user",
   },
-//   today: new Data(),
-//   born: Number,доделать
+  age:Number
 });
 
 const User = mongoose.model("User", userSchema);
