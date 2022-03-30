@@ -4,6 +4,7 @@ const { optinalsControllers } = require("../controllers/optinals.controller");
 const router = Router();
 
 router.post("/optinals", optinalsControllers.addOptinal);
-router.delete("/optinals", optinalsControllers.deleteOptinal);
+router.delete("/optinals/:optinalsId", optinalsControllers.deleteOptinal);
+router.patch("/optinals/:optinalsId", optinalsControllers.changeOptinal);
 
-module.exports = router
+module.exports = router;

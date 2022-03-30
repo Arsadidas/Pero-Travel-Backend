@@ -1,7 +1,6 @@
 const Review = require("../models/Review.model");
 const User = require("../models/User.model");
 
-
 module.exports.reviewsController = {
   getReviewsByTour: async (req, res) => {
     try {
