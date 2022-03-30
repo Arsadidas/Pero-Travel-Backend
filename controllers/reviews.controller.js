@@ -1,3 +1,5 @@
+const Review = require("../models/Review.model");
+
 module.exports.reviewsController = {
   getReviewsByTour: async (req, res) => {
     try {
