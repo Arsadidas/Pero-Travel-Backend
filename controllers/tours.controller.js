@@ -20,7 +20,7 @@ module.exports.toursController = {
 
   deleteTour: async (req, res) => {
     try {
-      const tour = await Tour.findByIdAndDelete(req.params.id);
+      const tour = await Tour.findByIdAndDelete(req.params.toursId);
       res.json(tour);
     } catch (e) {
       res.status(401).json({ error: "Ошибка " + e.toString() });

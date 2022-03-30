@@ -16,7 +16,19 @@ module.exports.optinalsControllers = {
   },
   deleteOptinal: async (req, res) => {
     try {
-      const optinal = await Optional.findByIdAndRemove(req.params.optinalId);
+      const optinal = await Optional.findByIdAndRemove(req.params.optinalsId);
+      res.json(optinal);
+    } catch (error) {
+      res.status(401).json("Ошибка " + error.toString());
+    }
+  },
+  changeOptinal: async (req, res) => {
+    try {
+      const { title, price } = req.body;
+      const optinal = await Optional.findByIdAndUpdate(req.params.optinalsId, {
+        title,
+        price,
+      });
       res.json(optinal);
     } catch (error) {
       res.status(401).json("Ошибка " + error.toString());

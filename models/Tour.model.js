@@ -9,12 +9,6 @@ const tourSchema = mongoose.Schema({
   priceForChild: Number,
   days: [],
   duration: Number,
-  optionals: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Optionals"
-    }
-  ],
   wayPoints: [],
   gallery: [],
 });
