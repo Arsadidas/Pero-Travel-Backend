@@ -1,10 +1,15 @@
-const { Router } = require('express')
-const { bookingsController } = require('../controllers/bookings.controller')
+const { Router } = require("express");
+const { bookingsController } = require("../controllers/bookings.controller");
+const authMiddleware = require("../middlewares/auth.middleware");
 
-const router = Router()
+const router = Router();
 
-router.get('/bookings', bookingsController.getBooking)
-router.post('/bookings', bookingsController.addBooking)
-router.patch('/bookings/:toursId', bookingsController.removeDayFromBooking)
+router.get("/bookings", authMiddleware, bookingsController.getBooking);
+router.post("/bookings", authMiddleware, bookingsController.addBooking);
+router.patch(
+  "/bookings/:toursId",
+  authMiddleware,
+  bookingsController.removeDayFromBooking
+);
 
-module.exports = router
+module.exports = router;
