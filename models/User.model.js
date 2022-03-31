@@ -9,7 +9,6 @@ const userSchema = mongoose.Schema({
     type: String,
     default: "user",
   },
-  age: Number,
 });
 
 const User = mongoose.model("User", userSchema);
