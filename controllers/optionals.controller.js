@@ -1,6 +1,6 @@
 const Optional = require("../models/Optional.model");
 
-module.exports.optinalsControllers = {
+module.exports.optinalsController = {
   addOptinal: async (req, res) => {
     try {
       const { tour, title, price } = req.body;
