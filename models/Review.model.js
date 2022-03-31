@@ -11,7 +11,6 @@ const reviewSchema = mongoose.Schema({
   },
   firstName: String,
   lastName: String,
-  userAge: Number,
   text: String,
 });
 

@@ -19,7 +19,6 @@ module.exports.reviewsController = {
         tour: req.body.id,
         firstName: user.firstName,
         lastName: user.lastName,
-        userAge: user.age,
         text: req.body.text,
       });
       res.json(reviews);
