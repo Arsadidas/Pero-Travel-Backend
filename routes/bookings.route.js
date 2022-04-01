@@ -6,8 +6,8 @@ const router = Router();
 
 router.get("/bookings", authMiddleware, bookingsController.getBooking);
 router.post("/bookings", authMiddleware, bookingsController.addBooking);
-router.patch(
-  "/bookings/:toursId",
+router.delete(
+  "/bookings/:bookingsId",
   authMiddleware,
   bookingsController.removeDayFromBooking
 );

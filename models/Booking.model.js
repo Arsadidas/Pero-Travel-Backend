@@ -9,7 +9,10 @@ const bookingSchema = mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "Tour",
   },
-  days: [],
+  day: {
+    type: Number,
+    required: true,
+  },
 });
 
 const Booking = mongoose.model("Booking", bookingSchema);
