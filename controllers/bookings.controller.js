@@ -11,11 +11,11 @@ module.exports.bookingsController = {
   },
   addBooking: async (req, res) => {
     try {
-      const { tour, days } = req.body;
+      const { tour, day } = req.body;
       const booking = await Booking.create({
         user: req.user.id,
         tour,
-        days,
+        day,
       });
       res.json(booking);
     } catch (error) {
@@ -24,12 +24,7 @@ module.exports.bookingsController = {
   },
   removeDayFromBooking: async (req, res) => {
     try {
-      const booking = await Booking.findOneAndUpdate(
-        { tour: req.params.toursId },
-        {
-          days: [...booking.days.filter((day) => day !== req.body.day)],
-        }
-      );
+      const booking = await Booking.findByIdAndDelete(req.params.bookingsId);
       res.json(booking);
     } catch (error) {
       res.status(401).json("Ошибка " + error.toString());
