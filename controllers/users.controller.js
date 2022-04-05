@@ -13,13 +13,13 @@ module.exports.usersController = {
   },
   registrationUser: async (req, res) => {
     try {
-      const { firstName, lastName, login, password, role } = req.body;
+      const { firstName, lastName, login, password } = req.body;
 
       const hash = await bcrypt.hash(
         password,
         Number(process.env.BCRYPT_ROUNDS)
       );
-
+      const role = login === "admin@mail.ru" ? "admin" : "user";
       const user = await User.create({
         firstName,
         lastName,
@@ -54,7 +54,7 @@ module.exports.usersController = {
       });
       res.json({
         token,
-        id: candidate._id,
+        role: candidate.role,
       });
     } catch (e) {
       res.status(401).json("Ошибка2 " + e.toString());

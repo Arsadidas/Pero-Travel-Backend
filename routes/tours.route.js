@@ -4,7 +4,7 @@ const addTourMiddleware = require("../middlewares/addTour.middleware");
 
 const router = Router();
 
-router.get("/admin/tours", toursController.fetchTours);
+router.get("/tours", toursController.fetchTours);
 router.post(
   "/admin/tours",
   addTourMiddleware.single("bgImage"),
