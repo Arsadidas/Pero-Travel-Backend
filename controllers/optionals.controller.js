@@ -1,7 +1,7 @@
 const Optional = require("../models/Optional.model");
 
 module.exports.optionalsController = {
-  addOptinal: async (req, res) => {
+  addOptional: async (req, res) => {
     try {
       const { tour, title, price } = req.body;
       const optinal = await Optional.create({
@@ -14,7 +14,7 @@ module.exports.optionalsController = {
       res.status(401).json("Ошибка " + error.toString());
     }
   },
-  deleteOptinal: async (req, res) => {
+  deleteOptional: async (req, res) => {
     try {
       const optinal = await Optional.findByIdAndRemove(req.params.optionalsId);
       res.json(optinal);
@@ -22,7 +22,7 @@ module.exports.optionalsController = {
       res.status(401).json("Ошибка " + error.toString());
     }
   },
-  changeOptinal: async (req, res) => {
+  changeOptional: async (req, res) => {
     try {
       const { title, price } = req.body;
       const optinal = await Optional.findByIdAndUpdate(req.params.optionalsId, {

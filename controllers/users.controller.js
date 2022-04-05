@@ -60,4 +60,17 @@ module.exports.usersController = {
       res.status(401).json("Ошибка2 " + e.toString());
     }
   },
+  changeUserPicture: async (req, res) => {
+    try {
+      const user = await User.findOneAndUpdate(
+        { _id: req.user.id },
+        {
+          image: req.file.path,
+        }
+      );
+      res.json(user);
+    } catch (error) {
+      res.status(401).json("Ошибка" + error.toString());
+    }
+  },
 };

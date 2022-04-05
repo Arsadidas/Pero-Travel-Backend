@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 
 const tourSchema = mongoose.Schema({
   typeTour: String,
+  bgImage: String,
   place: String,
   title: String,
   desc: String,
