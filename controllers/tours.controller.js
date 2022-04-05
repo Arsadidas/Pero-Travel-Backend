@@ -1,14 +1,25 @@
 const Tour = require("../models/Tour.model");
 
 module.exports.toursController = {
-  addTour: async (req, res) => {
-    const { typeTour, place, title, desc, priceForChild, duration } = req.body;
+  fetchTours: async (req, res) => {
     try {
+      const tours = await Tour.find();
+      res.json(tours);
+    } catch (error) {
+      res.status(401).json("Ошибка " + error.toString());
+    }
+  },
+  addTour: async (req, res) => {
+    try {
+      const { typeTour, place, title, desc, price, priceForChild, duration } =
+        req.body;
       const tour = await Tour.create({
         typeTour,
+        bgImage: req.file.path,
         place,
         title,
         desc,
+        price,
         priceForChild,
         duration,
       });
@@ -29,16 +40,13 @@ module.exports.toursController = {
 
   changeTour: async (req, res) => {
     try {
-      const { typeTour, place, title, desc, priceForChild, duration } =
+      const { typeTour, place, title, desc, price, priceForChild, duration } =
         req.body;
-      const tour = await Tour.findByIdAndUpdate(req.params.toursId, {
-        typeTour,
-        place,
-        title,
-        desc,
-        priceForChild,
-        duration,
+      await Tour.findByIdAndUpdate(req.params.toursId, {
+        ...req.body,
+        bgImage: req.file.path
       });
+      const tour = await Tour.findById(req.params.toursId)
       res.json(tour);
     } catch (e) {
       res.status(401).json("Ошибка " + e.toString());
