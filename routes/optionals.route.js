@@ -3,7 +3,7 @@ const { optionalsController } = require("../controllers/optionals.controller");
 
 const router = Router();
 
-router.post("/optionals", optionalsController.addOptional);
+router.post("/admin/optionals", optionalsController.addOptional);
 router.delete("/optionals/:optionalsId", optionalsController.deleteOptional);
 router.patch("/optionals/:optionalsId", optionalsController.changeOptional);
 
