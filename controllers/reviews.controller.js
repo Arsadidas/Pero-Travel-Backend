@@ -24,7 +24,7 @@ module.exports.reviewsController = {
 
       const reviews = await Review.create({
         user: req.user.id,
-        tour: req.body.id,
+        tour: req.params.id,
         firstName: user.firstName,
         lastName: user.lastName,
         image: user.image,
