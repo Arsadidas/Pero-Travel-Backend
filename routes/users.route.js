@@ -6,7 +6,7 @@ const authMiddleware = require("../middlewares/auth.middleware");
 const router = Router();
 
 router.get("/users", usersController.getAllUsers);
-router.post("/registration", usersController.registrationUser);
+router.post("/registration", authMiddleware, usersController.registrationUser);
 router.post("/login", usersController.login);
 router.patch(
   "/users/image",

@@ -2,9 +2,17 @@ const Review = require("../models/Review.model");
 const User = require("../models/User.model");
 
 module.exports.reviewsController = {
+  getReviews: async (req, res) => {
+    try {
+      const reviews = await Review.find();
+      res.json(reviews);
+    } catch (e) {
+      res.status(401).json("Ошибка " + e.toString());
+    }
+  },
   getReviewsByTour: async (req, res) => {
     try {
-      const reviews = await Review.find({ tour: req.body.tourId });
+      const reviews = await Review.find({ tour: req.params.id });
       res.json(reviews);
     } catch (e) {
       res.status(401).json("Ошибка " + e.toString());
@@ -19,6 +27,8 @@ module.exports.reviewsController = {
         tour: req.body.id,
         firstName: user.firstName,
         lastName: user.lastName,
+        image: user.image,
+        age: user.age,
         text: req.body.text,
       });
       res.json(reviews);
