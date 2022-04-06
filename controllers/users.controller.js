@@ -65,6 +65,7 @@ module.exports.usersController = {
       });
       res.json({
         token,
+        id: candidate._id,
         role: candidate.role,
       });
     } catch (e) {

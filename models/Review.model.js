@@ -11,6 +11,7 @@ const reviewSchema = mongoose.Schema({
   },
   firstName: String,
   lastName: String,
+  image: String,
   age: String,
   text: String,
 });
