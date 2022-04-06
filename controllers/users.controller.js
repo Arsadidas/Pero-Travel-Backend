@@ -11,21 +11,32 @@ module.exports.usersController = {
       res.status(401).json("Ошибка " + e.toString());
     }
   },
+  getIdUser: async (req, res) => {
+    try {
+      const user = await User.findOne({ _id: req.user.id });
+      res.status(200).json(user);
+    } catch (error) {
+      res.status(401).json("Ошибка " + error.toString());
+    }
+  },
   registrationUser: async (req, res) => {
     try {
-      const { firstName, lastName, login, password } = req.body;
+      const { firstName, lastName, login, password, age } = req.body;
 
       const hash = await bcrypt.hash(
         password,
         Number(process.env.BCRYPT_ROUNDS)
       );
       const role = login === "admin@mail.ru" ? "admin" : "user";
+      const image = "images/user/0604222022-114408_526-blank-avatar.jpg";
       const user = await User.create({
         firstName,
         lastName,
         login,
         password: hash,
         role,
+        age,
+        image,
       });
       res.json(user);
     } catch (e) {
@@ -62,12 +73,13 @@ module.exports.usersController = {
   },
   changeUserPicture: async (req, res) => {
     try {
-      const user = await User.findOneAndUpdate(
+      await User.findOneAndUpdate(
         { _id: req.user.id },
         {
           image: req.file.path,
         }
       );
+      const user = await User.findOne({_id: req.user.id})
       res.json(user);
     } catch (error) {
       res.status(401).json("Ошибка" + error.toString());
