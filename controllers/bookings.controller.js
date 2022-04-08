@@ -11,11 +11,12 @@ module.exports.bookingsController = {
   },
   addBooking: async (req, res) => {
     try {
-      const { tour, day } = req.body;
+      const { tour, day, people } = req.body;
       const booking = await Booking.create({
         user: req.user.id,
         tour,
         day,
+        people,
       });
       res.json(booking);
     } catch (error) {

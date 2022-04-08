@@ -13,6 +13,7 @@ const bookingSchema = mongoose.Schema({
     type: Number,
     required: true,
   },
+  people: Number,
 });
 
 const Booking = mongoose.model("Booking", bookingSchema);
