@@ -1,4 +1,5 @@
 const Booking = require("../models/Booking.model");
+const Tour = require("../models/Tour.model");
 
 module.exports.bookingsController = {
   getBooking: async (req, res) => {
@@ -11,14 +12,22 @@ module.exports.bookingsController = {
   },
   addBooking: async (req, res) => {
     try {
-      const { tour, day, people } = req.body;
+      const { tour, day, people, timeInformation } = req.body;
       const booking = await Booking.create({
         user: req.user.id,
         tour,
         day,
         people,
+        timeInformation,
       });
-      res.json(booking);
+      const tours = await Tour.findOneAndUpdate(
+        { _id: booking.tour },
+        {
+          ...tours,
+          tickets: tours.tickets - booking.people,
+        }
+      );
+      // res.json(booking);
     } catch (error) {
       res.status(401).json("Ошибка " + error.toString());
     }
