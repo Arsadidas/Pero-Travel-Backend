@@ -44,12 +44,28 @@ module.exports.toursController = {
         req.body;
       await Tour.findByIdAndUpdate(req.params.toursId, {
         ...req.body,
-        bgImage: req.file.path
+        bgImage: req.file.path,
       });
-      const tour = await Tour.findById(req.params.toursId)
+      const tour = await Tour.findById(req.params.toursId);
       res.json(tour);
     } catch (e) {
       res.status(401).json("Ошибка " + e.toString());
+    }
+  },
+
+  changeTourGallery: async (req, res) => {
+    try {
+      console.log(req.params.toursId);
+      console.log(req.file.path);
+      await findByIdAndUpdate(req.params.toursId, {
+        $push: {
+          gallery: req.file.path,
+        },
+      });
+      const tour = await Tour.findById(req.params.toursId);
+      res.json(tour);
+    } catch (error) {
+      res.status(401).json("Ошибка " + error.toString());
     }
   },
 };
