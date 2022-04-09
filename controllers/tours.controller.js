@@ -11,8 +11,16 @@ module.exports.toursController = {
   },
   addTour: async (req, res) => {
     try {
-      const { typeTour, place, title, desc, price, priceForChild, duration } =
-        req.body;
+      const {
+        typeTour,
+        place,
+        title,
+        desc,
+        price,
+        priceForChild,
+        duration,
+        tickets,
+      } = req.body;
       const tour = await Tour.create({
         typeTour,
         bgImage: req.file.path,
@@ -22,6 +30,7 @@ module.exports.toursController = {
         price,
         priceForChild,
         duration,
+        tickets,
       });
       res.json(tour);
     } catch (e) {
