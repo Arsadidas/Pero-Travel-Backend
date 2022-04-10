@@ -24,23 +24,6 @@ module.exports.usersController = {
     try {
       const { firstName, lastName, login, password, age } = req.body;
 
-      const transporter = nodemailer.createTransport({
-        host: 'smtp.ethereal.email',
-        port: 587,
-        auth: {
-            user: 'alaina.boyle36@ethereal.email',
-            pass: 'NcUhMJvktprVu35gs4'
-        }
-    });
-
-      await transporter.sendMail({
-        from: '<alaina.boyle36@ethereal.email>',
-        to: `${login}`,
-        subject: 'Message from Pero Travel',
-        text: 'Поздравляю, ваша заявка успешно отправлена!',
-        html: 'Поздравляю, ваша заявка успешно отправлена!',
-      });
-
       const hash = await bcrypt.hash(
         password,
         Number(process.env.BCRYPT_ROUNDS)
