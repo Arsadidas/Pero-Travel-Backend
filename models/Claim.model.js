@@ -5,6 +5,12 @@ const claimSchema = mongoose.Schema({
     type: String,
     required: true,
   },
+  text: {
+    type: String,
+  },
+  phone: {
+    type: Number,
+  },
 });
 
 const Claim = mongoose.model("Claim", claimSchema);

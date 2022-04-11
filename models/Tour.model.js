@@ -9,6 +9,10 @@ const tourSchema = mongoose.Schema({
     type: String,
     required: true,
   },
+  vcImage: {
+    type: String,
+    required:true
+  },
   place: {
     type: String,
     required: true,
