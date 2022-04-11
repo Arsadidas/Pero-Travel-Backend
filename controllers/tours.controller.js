@@ -24,6 +24,7 @@ module.exports.toursController = {
       const tour = await Tour.create({
         typeTour,
         bgImage: req.file.path,
+        vcImage: req.file.path,
         place,
         title,
         desc,

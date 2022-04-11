@@ -24,6 +24,7 @@ module.exports.usersController = {
     try {
       const { firstName, lastName, login, password, age } = req.body;
 
+
       const hash = await bcrypt.hash(
         password,
         Number(process.env.BCRYPT_ROUNDS)

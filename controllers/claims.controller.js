@@ -4,7 +4,7 @@ const nodemailer = require("nodemailer");
 module.exports.claimsController = {
   addClaims: async (req, res) => {
     try {
-      const { email } = req.body;
+      const { email, text, phone } = req.body;
 
       const transporter = nodemailer.createTransport({
         host: "smtp.ethereal.email",
@@ -20,11 +20,17 @@ module.exports.claimsController = {
         to: `${email}`,
         subject: "Message from Pero Travel",
         text: "Поздравляю, ваша заявка успешно отправлена!",
-        html: "Поздравляю, ваша заявка успешно отправлена!",
+        html: `<h2>Ваши данные</h2> <br />
+        <li>
+            <ul><b>Ваш вопрос:</b> ${text}</ul>
+            <ul><b>Ваш телефон:</b> ${phone}</ul>
+        </li>`,
       });
 
       const claim = await Claim.create({
         email,
+        text,
+        phone,
       });
       res.json(claim);
     } catch (e) {
