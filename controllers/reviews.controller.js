@@ -21,17 +21,16 @@ module.exports.reviewsController = {
   addReview: async (req, res) => {
     try {
       const user = await User.findOne({ _id: req.user.id });
-
-      const reviews = await Review.create({
+      const review = await Review.create({
         user: req.user.id,
-        tour: req.params.id,
+        tour: req.params.toursId,
         firstName: user.firstName,
         lastName: user.lastName,
         image: user.image,
         age: user.age,
         text: req.body.text,
       });
-      res.json(reviews);
+      res.json(review);
     } catch (e) {
       res.status(401).json({ error: "Ошибка " + e.toString() });
     }

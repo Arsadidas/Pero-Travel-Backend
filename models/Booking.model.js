@@ -23,6 +23,10 @@ const bookingSchema = mongoose.Schema({
     type: Number,
     required: true,
   },
+  total: {
+    type: Number,
+    required: true,
+  },
 });
 
 const Booking = mongoose.model("Booking", bookingSchema);
