@@ -19,5 +19,9 @@ router.patch(
   addFilleMiddleware.single("image"),
   usersController.changeUserPicture
 );
-
+router.patch(
+  "/users/profile/photo",
+  authMiddleware,
+  usersController.deleteProfilePhoto
+);
 module.exports = router;

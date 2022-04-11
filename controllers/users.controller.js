@@ -15,7 +15,7 @@ module.exports.usersController = {
   getIdUser: async (req, res) => {
     try {
       const user = await User.findOne({ _id: req.user.id });
-      res.status(200).json(user);
+      res.json(user);
     } catch (error) {
       res.status(401).json("Ошибка " + error.toString());
     }
@@ -30,7 +30,8 @@ module.exports.usersController = {
         Number(process.env.BCRYPT_ROUNDS)
       );
       const role = login === "admin@mail.ru" ? "admin" : "user";
-      const image = "images/user/0604222022-114408_526-blank-avatar.jpg";
+      const image =
+        "images/user/default/0604222022-114408_526-blank-avatar.jpg";
       const user = await User.create({
         firstName,
         lastName,
@@ -82,10 +83,24 @@ module.exports.usersController = {
           image: req.file.path,
         }
       );
-      const user = await User.findOne({_id: req.user.id})
+      const user = await User.findOne({ _id: req.user.id });
       res.json(user);
     } catch (error) {
       res.status(401).json("Ошибка" + error.toString());
+    }
+  },
+  deleteProfilePhoto: async (req, res) => {
+    try {
+      const image =
+        "images/user/default/0604222022-114408_526-blank-avatar.jpg";
+      const user = await User.findOne({ _id: req.user.id });
+      await user.update({
+        image,
+      });
+      const userJson = await User.findOne({ _id: req.user.id });
+      res.json(userJson);
+    } catch (error) {
+      res.status(401).json("Ошибка " + error.toString());
     }
   },
 };

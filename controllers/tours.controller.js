@@ -65,8 +65,6 @@ module.exports.toursController = {
 
   changeTourGallery: async (req, res) => {
     try {
-      console.log(req.params.toursId);
-      console.log(req.file.path);
       await findByIdAndUpdate(req.params.toursId, {
         $push: {
           gallery: req.file.path,
