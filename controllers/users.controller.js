@@ -1,6 +1,7 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const User = require("../models/User.model");
+const nodemailer = require('nodemailer');
 
 module.exports.usersController = {
   getAllUsers: async (req, res) => {
@@ -23,6 +24,7 @@ module.exports.usersController = {
     try {
       const { firstName, lastName, login, password, age } = req.body;
 
+
       const hash = await bcrypt.hash(
         password,
         Number(process.env.BCRYPT_ROUNDS)
@@ -37,7 +39,7 @@ module.exports.usersController = {
         password: hash,
         role,
         age,
-        image,
+        image
       });
       res.json(user);
     } catch (e) {
