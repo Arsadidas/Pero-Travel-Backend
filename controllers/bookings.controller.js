@@ -34,6 +34,11 @@ module.exports.bookingsController = {
       await tours.update({
         tickets: recalculation,
       });
+      await tours.update({
+        $push: {
+          days: req.body.day,
+        },
+      });
       res.json("Забронировано");
     } catch (error) {
       res.status(401).json("Ошибка " + error.toString());
@@ -55,6 +60,9 @@ module.exports.bookingsController = {
       const recalculation = tour.tickets + booking.people;
       await tour.update({
         tickets: recalculation,
+      });
+      await tour.update({
+        days: tour.days.filter((day) => day != booking.day),
       });
       await Booking.findByIdAndDelete(req.params.bookingsId);
       res.json(booking);

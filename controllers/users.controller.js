@@ -1,7 +1,7 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const User = require("../models/User.model");
-const nodemailer = require('nodemailer');
+const nodemailer = require("nodemailer");
 
 module.exports.usersController = {
   getAllUsers: async (req, res) => {
@@ -24,7 +24,6 @@ module.exports.usersController = {
     try {
       const { firstName, lastName, login, password, age } = req.body;
 
-
       const hash = await bcrypt.hash(
         password,
         Number(process.env.BCRYPT_ROUNDS)
@@ -39,7 +38,7 @@ module.exports.usersController = {
         password: hash,
         role,
         age,
-        image
+        image,
       });
       res.json(user);
     } catch (e) {
@@ -101,6 +100,28 @@ module.exports.usersController = {
       res.json(userJson);
     } catch (error) {
       res.status(401).json("Ошибка " + error.toString());
+    }
+  },
+  changeEditProfile: async (req, res) => {
+    try {
+      const json = await User.findOne({ _id: req.user.id });
+      const firstName = req.body.firstName
+        ? req.body.firstName
+        : json.firstName;
+      const lastName = req.body.lastName ? req.body.lastName : json.lastName;
+      const age = req.body.age ? req.body.age : json.age;
+      await User.findOneAndUpdate(
+        { _id: req.user.id },
+        {
+          firstName,
+          lastName,
+          age,
+        }
+      );
+      const user = await User.findOne({ _id: req.user.id });
+      res.json(user);
+    } catch (error) {
+      res.status(401).json("Ошибка " + toString());
     }
   },
 };
