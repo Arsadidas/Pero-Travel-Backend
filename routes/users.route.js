@@ -24,4 +24,10 @@ router.patch(
   authMiddleware,
   usersController.deleteProfilePhoto
 );
+router.patch(
+  "/users/profile/edit",
+  authMiddleware,
+  usersController.changeEditProfile
+);
+
 module.exports = router;
