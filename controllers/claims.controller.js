@@ -7,16 +7,17 @@ module.exports.claimsController = {
       const { email, text, phone } = req.body;
 
       const transporter = nodemailer.createTransport({
-        host: "smtp.ethereal.email",
-        port: 587,
+        host: "smtp.mail.ru",
+        port: 465,
+        secure: true,
         auth: {
-          user: "alaina.boyle36@ethereal.email",
-          pass: "NcUhMJvktprVu35gs4",
+          user: "perotravel@mail.ru",
+          pass: "MU3gzdDKr52dkJw0fY8G",
         },
       });
 
       await transporter.sendMail({
-        from: "<alaina.boyle36@ethereal.email>",
+        from: "<perotravel@mail.ru>",
         to: `${email}`,
         subject: "Message from Pero Travel",
         text: "Поздравляю, ваша заявка успешно отправлена!",
