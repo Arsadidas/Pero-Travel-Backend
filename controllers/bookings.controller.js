@@ -1,4 +1,5 @@
 const Booking = require("../models/Booking.model");
+const Order = require("../models/Order.model");
 const Tour = require("../models/Tour.model");
 
 module.exports.bookingsController = {
@@ -38,6 +39,12 @@ module.exports.bookingsController = {
         $push: {
           days: req.body.day,
         },
+      });
+      await Order.create({
+        user: req.user.id,
+        tour: tours._id,
+        total: booking.total,
+        сompletionTime: timeInformation,
       });
       res.json("Забронировано");
     } catch (error) {
