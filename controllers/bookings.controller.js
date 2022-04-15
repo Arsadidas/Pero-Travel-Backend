@@ -77,4 +77,12 @@ module.exports.bookingsController = {
       res.status(401).json("Ошибка " + error.toString());
     }
   },
+  clearArchive: async (req, res) => {
+    try {
+      const json = await Booking.findByIdAndDelete(req.params.bookingsId);
+      res.json(json);
+    } catch (error) {
+      res.status(401).json("Ошибка " + error.toString());
+    }
+  },
 };
