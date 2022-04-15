@@ -21,11 +21,7 @@ module.exports.claimsController = {
         to: `${email}`,
         subject: "Message from Pero Travel",
         text: "Поздравляю, ваша заявка успешно отправлена!",
-        html: `<h2>Ваши данные</h2> <br />
-        <li>
-            <ul><b>Ваш вопрос:</b> ${text}</ul>
-            <ul><b>Ваш телефон:</b> ${phone}</ul>
-        </li>`,
+        html: "Поздравляю, ваша заявка успешно отправлена!",
       });
 
       const claim = await Claim.create({
