@@ -5,7 +5,7 @@ const Tour = require("../models/Tour.model");
 module.exports.bookingsController = {
   getBooking: async (req, res) => {
     try {
-      const bookings = await Booking.find();
+      const bookings = await Booking.find().populate("user").populate("tour")
       res.json(bookings);
     } catch (error) {
       res.status(401).json("Ошибка " + error.toString());
@@ -13,7 +13,7 @@ module.exports.bookingsController = {
   },
   getIdBooking: async (req, res) => {
     try {
-      const booking = await Booking.find({ user: req.user.id });
+      const booking = await Booking.find({ user: req.user.id }).populate("user").populate("tour")
       res.json(booking);
     } catch (error) {
       res.status(401).json("Ошибка " + error.toString());
