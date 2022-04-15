@@ -14,9 +14,7 @@ router.delete(
   authMiddleware,
   bookingsController.removeDayFromBooking
 );
-router.delete(
-  "/bookings/delete/:bookingsId",
-  bookingsController.deleteBooking
-);
+router.delete("/bookings/delete/:bookingsId", bookingsController.deleteBooking);
+router.delete("/bookings/archive/:bookingsId", bookingsController.clearArchive);
 
 module.exports = router;

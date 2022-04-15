@@ -52,9 +52,11 @@ module.exports.toursController = {
     try {
       const { typeTour, place, title, desc, price, priceForChild, duration } =
         req.body;
+      const json = await Tour.findById(req.params.id);
+      const bgImage = req.file.path ? req.file.path : json.bgImage;
       await Tour.findByIdAndUpdate(req.params.toursId, {
         ...req.body,
-        bgImage: req.file.path,
+        bgImage,
       });
       const tour = await Tour.findById(req.params.toursId);
       res.json(tour);
