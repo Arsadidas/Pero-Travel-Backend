@@ -1,6 +1,14 @@
 const Optional = require("../models/Optional.model");
 
 module.exports.optionalsController = {
+  getOptionals: async (req, res) => {
+    try {
+      const optionals = await Optional.find();
+      res.json(optionals);
+    } catch (error) {
+      res.json("Ошибка " + error.toString());
+    }
+  },
   addOptional: async (req, res) => {
     try {
       const { tour, title, price } = req.body;
